@@ -3,10 +3,11 @@
 
 
 from typing import List
+
+
 def sum_list(input_list: List[float]) -> float:
     '''defining the function'''
     total = 0
     for x in input_list:
         total += x
     return (total)
-
