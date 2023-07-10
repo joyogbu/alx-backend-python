@@ -16,6 +16,6 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         for i in range(n):
             # await asyncio.sleep(max_delay)
             group = asyncio.create_task(wait_random(max_delay))
-            #li = await asyncio.gather(wait_random(max_delay))
+            # li = await asyncio.gather(wait_random(max_delay))
             li = await asyncio.gather(group)
         return (li)
