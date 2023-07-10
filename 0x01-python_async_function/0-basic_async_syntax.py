@@ -6,7 +6,7 @@ import asyncio
 import random
 
 
-async def wait_random(max_delay: int = 10):
+async def wait_random(max_delay: int = 10) -> float:
     '''defining the function'''
     # for i in range(0, max_delay):
     i = random.uniform(0, max_delay)
