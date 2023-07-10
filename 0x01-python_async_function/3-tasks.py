@@ -9,6 +9,6 @@ from typing import Awaitable, Any, Callable, Coroutine
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
-def task_wait_random(max_delay: int) -> Callable:
+def task_wait_random(max_delay: int) -> Callable[[float], int]:
     '''defining the function'''
     return asyncio.ensure_future(wait_random(max_delay))
