@@ -13,9 +13,11 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 async def wait_n(n: int, max_delay: int) -> List[float]:
     '''defining the function'''
     while True:
+        group = []
         for i in range(n):
             # await asyncio.sleep(max_delay)
-            group = asyncio.create_task(wait_random(max_delay))
+            group.append(asyncio.create_task(wait_random(max_delay)))
             # li = await asyncio.gather(wait_random(max_delay))
-            li = await asyncio.gather(group)
+            li = await asyncio.gather(*group)
+            # await asyncio.sleep(max_delay)
         return (li)
