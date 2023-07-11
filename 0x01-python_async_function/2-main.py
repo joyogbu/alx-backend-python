@@ -4,4 +4,4 @@ import asyncio
 n = 5
 max_delay = 9
 
-print(asyncio.run(measure_time(n, max_delay)))
+print(measure_time(n, max_delay))
