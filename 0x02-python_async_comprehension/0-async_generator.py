@@ -7,7 +7,7 @@ import random
 from typing import Generator, Iterator
 
 
-async def async_generator() -> Iterator[float]:
+async def async_generator() -> Generator[float, None, None,]:
     '''defining the function'''
     i = random.uniform(0, 10)
     # for i in range(10):
