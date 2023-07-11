@@ -14,8 +14,9 @@ async def measure_runtime() -> float:
     '''defining the function'''
     res = []
     for i in range(4):
-        t1 = time.perf_counter()
+        # t1 = time.perf_counter()
         res.append(asyncio.create_task(async_comprehension()))
+        t1 = time.perf_counter()
         li = await asyncio.gather(*res)
         t2 = time.perf_counter() - t1
     return(t2)
