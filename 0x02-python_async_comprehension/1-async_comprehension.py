@@ -9,7 +9,7 @@ from typing import Generator, Iterator, Iterable
 async_generator = __import__('0-async_generator').async_generator
 
 
-async def async_comprehension() -> Iterable[float]:
+async def async_comprehension() -> Iterable[list]:
     '''defining the function'''
     numbers = [i async for i in async_generator()]
     return (numbers)
