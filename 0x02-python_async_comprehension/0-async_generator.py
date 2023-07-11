@@ -7,10 +7,11 @@ import random
 from typing import Generator, Iterator
 
 
-async def async_generator() -> Generator[float, None, None,]:
+async def async_generator() -> Generator[float, float, None]:
     '''defining the function'''
-    i = random.uniform(0, 10)
-    # for i in range(10):
-    # yield i
-    await asyncio.sleep(1)
-    yield i
+    for i in range(10):
+        i = random.uniform(0, 10)
+        # for i in range(10):
+        # yield i
+        await asyncio.sleep(1)
+        yield i
