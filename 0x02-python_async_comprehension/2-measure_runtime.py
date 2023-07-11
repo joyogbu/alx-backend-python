@@ -12,11 +12,12 @@ async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 async def measure_runtime() -> float:
     '''defining the function'''
-    res = []
-    for i in range(4):
-        # t1 = time.perf_counter()
-        res.append(asyncio.create_task(async_comprehension()))
-        t1 = time.perf_counter()
-        li = await asyncio.gather(*res)
-        t2 = time.perf_counter() - t1
+    # res = []
+    # for i in range(4):
+    res = [async_comprehension() for i in range(4)]
+    t1 = time.perf_counter()
+    # res.append(asyncio.create_task(async_comprehension()))
+    # t1 = time.perf_counter()
+    li = await asyncio.gather(*res)
+    t2 = time.perf_counter() - t1
     return(t2)
