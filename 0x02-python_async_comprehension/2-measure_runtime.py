@@ -10,7 +10,7 @@ from typing import Iterator, Generator, Iterable
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime() -> Generator[None, None, float]:
+async def measure_runtime() -> float:
     '''defining the function'''
     res = []
     for i in range(4):
