@@ -4,6 +4,7 @@
 
 import unittest
 from parameterized import parameterized
+from unittest import mock
 from utils import access_nested_map
 
 
@@ -26,3 +27,16 @@ class TestAccessNestedMap(unittest.TestCase):
         '''defining function for test exception'''
         with self.assertRaises(KeyError) as err:
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    '''defining the class for the function get_json'''
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+        ])
+    @mock.patch('requests.get')
+    def test_get_json(self, test_url, test_payload):
+        '''defining the function for testing mock url'''
+        mock.assert_call_once_with(test_url)
+        self.assertEqual(get_json(test_url, test_payload))
