@@ -43,10 +43,11 @@ class TestGetJson(unittest.TestCase):
         '''defining the function for testing mock url'''
         # test_url="http://example.com", test_payload={"payload": True}
         # self.assert_call_once_with(test_url)
-        with patch('requests.get') as p:
+        with patch('requests.get'):
             mock_response = Mock()
-            mock_response.json.return_value = test_payload
-            # mock_get.json.return_value = mock_response
-            self.assertEqual(get_json(test_url), test_payload)
+            mock_response.get_json.return_value = test_payload
+            # mock_get.return_value = mock_response
+            mock_response.get.side_effect = test_payload.get
+            self.assertEqual(mock_response.get_json(test_url), test_payload)
         # assert_called_once_with(test_url)
         # self.assertEqual(test_url, test_payload)
