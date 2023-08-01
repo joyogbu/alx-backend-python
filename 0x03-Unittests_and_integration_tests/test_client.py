@@ -30,10 +30,23 @@ class TestGithubOrgClient(unittest.TestCase):
         ])
     def test_public_repos_url(self, expected):
         '''defining the test method'''
-        with patch('client.GithubOrgClient.org', new_callable = PropertyMock) as p:
+        with patch('client.GithubOrgClient.org', new_callable=PropertyMock) \
+                as p:
             # mock_response = PropertyMock()
             # p._public_repos_uel.return_value = expected
-            p.return_value = expected
+            p._public_repos_url.return_value = expected
             this_p = GithubOrgClient(expected)
             self.assertEqual(p._public_repos_url(), expected)
-            # self.assertEqual(this_p, expected)
+
+    @patch('utils.get_json')
+    def test_public_repos(self, expected):
+        '''defining the function'''
+        # @mock.patch('utils.get_json')
+        # mock_response = Mock()
+        # mock_response.get_json.return_value = '{payload: True'}
+        with patch('client.GithubOrgClient._public_repos_url') as p:
+            # @patch('utils.get_json')
+            mock_response = Mock()
+            mock_response.get_json.return_value = '{payload: True}'
+            p._public_repos_url.return_value = 'test_url'
+            self.assertEqual(p._public_repos_url(), 'test_url')
