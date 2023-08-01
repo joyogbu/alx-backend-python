@@ -20,5 +20,5 @@ class TestGithubOrgClient(unittest.TestCase):
         '''defining the test org function'''
         with patch('client.GithubOrgClient.org')as p:
             mock_response = Mock()
-            mock_response.get_json.return_value = expected
+            mock_response.org.return_value = expected
             self.assertEqual(mock_response.org(), expected)
