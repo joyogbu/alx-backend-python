@@ -8,6 +8,7 @@ from unittest.mock import patch, Mock, PropertyMock
 from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from client import GithubOrgClient
+# from client import has_license
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -50,3 +51,12 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_response.get_json.return_value = '{payload: True}'
             p._public_repos_url.return_value = 'test_url'
             self.assertEqual(p._public_repos_url(), 'test_url')
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+        ])
+    def test_has_license(self, res, license_key, expected):
+        '''defining the function'''
+        self.assertEqual(GithubOrgClient.has_license(
+            res, license_key), expected)
