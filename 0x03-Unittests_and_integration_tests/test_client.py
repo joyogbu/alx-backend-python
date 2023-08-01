@@ -4,9 +4,10 @@
 
 import unittest
 from unittest import mock
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, PropertyMock
 from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
+from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -22,3 +23,17 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_response = Mock()
             mock_response.org.return_value = expected
             self.assertEqual(mock_response.org(), expected)
+
+    @parameterized.expand([
+        ('google'),
+        ('abc')
+        ])
+    def test_public_repos_url(self, expected):
+        '''defining the test method'''
+        with patch('client.GithubOrgClient.org', new_callable = PropertyMock) as p:
+            # mock_response = PropertyMock()
+            # p._public_repos_uel.return_value = expected
+            p.return_value = expected
+            this_p = GithubOrgClient(expected)
+            self.assertEqual(p._public_repos_url(), expected)
+            # self.assertEqual(this_p, expected)
